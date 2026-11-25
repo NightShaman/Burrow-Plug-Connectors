@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "outlook-calendar",
+  "name": "Outlook Calendar",
+  "version": "2026.11.25",
+  "description": "Read upcoming Outlook calendar events through Microsoft Graph. No mail or calendar changes.",
+  "origin": "https://graph.microsoft.com",
+  "auth": {"type": "microsoft_device_code"},
+  "features": [{
+    "id": "calendar",
+    "name": "Calendar",
+    "access": "read",
+    "scopes": ["Calendars.ReadBasic"],
+    "actions": [{
+      "id": "upcoming-events",
+      "name": "Read upcoming events",
+      "description": "Read basic event details for the next 1–30 days (7 by default). Times are UTC.",
+      "method": "GET",
+      "path": "/v1.0/me/calendarView",
+      "inputs": {
+        "days": {"type": "integer", "min": 1, "max": 30, "default": 7},
+        "limit": {"type": "integer", "min": 1, "max": 50, "default": 20}
+      },
+      "query": {
+        "startDateTime": {"now": true},
+        "endDateTime": {"daysFromNow": "days"},
+        "$top": {"input": "limit"},
+        "$orderby": "start/dateTime",
+        "$select": "subject,start,end,location,isAllDay,showAs"
+      },
+      "response": {
+        "collection": "value",
+        "limit": 50,
+        "fields": {
+          "subject": "subject",
+          "start": "start.dateTime",
+          "end": "end.dateTime",
+          "timeZone": "start.timeZone",
+          "location": "location.displayName",
+          "isAllDay": "isAllDay",
+          "showAs": "showAs"
+        }
+      }
+    }]
+  }]
+}

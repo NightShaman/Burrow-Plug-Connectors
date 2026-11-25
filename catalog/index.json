@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "outlook-calendar",
+      "name": "Outlook Calendar",
+      "version": "2026.11.25",
+      "description": "Read upcoming Outlook calendar events through Microsoft Graph. No mail or calendar changes.",
+      "url": "https://raw.githubusercontent.com/NightShaman/Burrow-Plug-Connectors/v2026.11.25/connectors/outlook-calendar.json",
+      "digest": "de497d368a11762ac95e4eba7683a31a7dc6dfbfd75a843c691a8b2519bbf371"
+    }
+  ]
+}
